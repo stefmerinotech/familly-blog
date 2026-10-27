@@ -1,0 +1,46 @@
+name: Deploy Blog to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            # 1. Asegurar el entorno de Node y pnpm en la sesión SSH
+            export PATH=$PATH:/usr/bin:~/.local/share/pnpm
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+
+            # 2. Entrar al directorio del blog
+            cd /var/www/familly.app/familly-blog
+
+            # 3. Descargar cambios limpios de la rama main
+            git config core.filemode false
+            git fetch origin main
+            git reset --hard origin/main
+
+            # 4. Instalar dependencias y compilar el HTML estático de Astro
+            pnpm install
+            pnpm build
+
+            # 5. Asegurar permisos para que Nginx lea la carpeta dist
+            sudo chmod -R 775 /var/www/familly.app/familly-blog/dist
+
+      - name: Smoke Test Blog
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://familly.app/blog/)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Fallo: /blog devolvió status $STATUS"
+            exit 1
+          fi
+          echo "✅ Blog desplegado y respondiendo 200 OK en https://familly.app/blog/"
