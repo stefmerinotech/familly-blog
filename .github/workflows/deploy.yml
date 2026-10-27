@@ -29,12 +29,8 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # 4. Instalar dependencias y compilar el HTML estático de Astro
-            pnpm install
+            # 4. Compilar los archivos estáticos de Astro (sin reinstalar dependencias)
             pnpm build
-
-            # 5. Asegurar permisos para que Nginx lea la carpeta dist
-            sudo chmod -R 775 /var/www/familly.app/familly-blog/dist
 
       - name: Smoke Test Blog
         run: |
