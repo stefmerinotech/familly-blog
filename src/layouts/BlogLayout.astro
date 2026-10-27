@@ -1,0 +1,148 @@
+---
+import LanguageToggle from '../components/LanguageToggle.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'es' | 'en';
+  image?: string;
+  alternateUrl?: string;
+  isArticle?: boolean;
+  pubDate?: Date;
+  author?: string;
+}
+
+const {
+  title = 'Familly Blog · Technical Journey & Build in Public',
+  description = 'Crónicas de arquitectura, decisiones de producto y experimentos del asistente familiar proactivo sin menús complejos.',
+  lang = 'es',
+  image = 'https://familly.app/logo.png',
+  alternateUrl,
+  isArticle = false,
+  pubDate,
+  author = 'Stefano Merino',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, 'https://familly.app');
+const siteTitle = title.includes('Familly') ? title : `${title} · Familly`;
+const currentYear = new Date().getFullYear();
+
+const navLinks = {
+  es: [
+    { label: 'Inicio', href: 'https://familly.app/' },
+    { label: 'Blog', href: '/blog/', active: true },
+    { label: 'Waitlist', href: 'https://familly.app/#newsletter' },
+  ],
+  en: [
+    { label: 'Home', href: 'https://familly.app/' },
+    { label: 'Blog', href: '/blog/en/', active: true },
+    { label: 'Waitlist', href: 'https://familly.app/#newsletter' },
+  ],
+};
+
+const footerCopy = {
+  es: `© ${currentYear} Familly. Todos los derechos reservados.`,
+  en: `© ${currentYear} Familly. All rights reserved.`,
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl.href} />
+    <link rel="icon" type="image/svg+xml" href="/blog/favicon.svg" />
+    <meta name="theme-color" content="#e85d3a" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- OpenGraph (LinkedIn, Facebook, Slack previews) -->
+    <meta property="og:site_name" content="Familly" />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content={isArticle ? 'article' : 'website'} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+
+    {isArticle && pubDate && (
+      <meta property="article:published_time" content={pubDate.toISOString()} />
+    )}
+    {isArticle && author && (
+      <meta property="article:author" content={author} />
+    )}
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <a href="https://familly.app/" class="brand-logo-group" aria-label="Familly Home">
+          <!--<span class="brand-title">Familly<span>.</span></span>
+          <span class="brand-badge">Journey</span>-->
+          <img src="/logo.png" alt="Familly Logo" class="brand-logo-img">
+          
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            {navLinks[lang].map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={`nav-link ${item.active ? 'active' : ''}`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <LanguageToggle currentLang={lang} alternateUrl={alternateUrl} />
+          <a
+            href="https://familly.app/#newsletter"
+            class="btn btn-primary"
+            style="font-size: 13px; padding: 6px 14px;"
+          >
+            {lang === 'es' ? 'Unirse a la Beta' : 'Join Waitlist'}
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>{footerCopy[lang]}</p>
+        <ul class="footer-links">
+          <li><a href="https://familly.app/">Familly App</a></li>
+          <li><a href={lang === 'es' ? '/blog/' : '/blog/en/'}>Blog</a></li>
+          <li><a href="https://familly.app/#newsletter">{lang === 'es' ? 'Lista de Espera' : 'Waitlist'}</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
+

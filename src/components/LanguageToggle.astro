@@ -1,0 +1,30 @@
+---
+interface Props {
+  currentLang: 'es' | 'en';
+  alternateUrl?: string;
+}
+
+const { currentLang, alternateUrl } = Astro.props;
+
+const esUrl = currentLang === 'es' ? '#' : (alternateUrl || '/blog/');
+const enUrl = currentLang === 'en' ? '#' : (alternateUrl || '/blog/en/');
+---
+
+<div class="lang-switcher" role="group" aria-label="Language Selector">
+  <a
+    href={esUrl}
+    class={`lang-btn ${currentLang === 'es' ? 'active' : ''}`}
+    aria-pressed={currentLang === 'es'}
+  >
+    ES
+  </a>
+  <span class="lang-divider">/</span>
+  <a
+    href={enUrl}
+    class={`lang-btn ${currentLang === 'en' ? 'active' : ''}`}
+    aria-pressed={currentLang === 'en'}
+  >
+    EN
+  </a>
+</div>
+

@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+// Fetch all English posts sorted by publication date
+const posts = (await getCollection('blog', ({ data }: any) => data.lang === 'en')) as any[];
+posts.sort((a: any, b: any) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BlogLayout
+  title="Familly Blog · Building an AI Family Assistant in Public"
+  description="Engineering logs, product decisions, and weekly takeaways while creating Familly with zero complex menus."
+  lang="en"
+  alternateUrl="/blog/"
+>
+  <div class="container">
+    <header class="blog-hero">
+      <div class="badge-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        <span>Build in Public & Changelog</span>
+      </div>
+      <h1>Building the Future of <span>Household Harmony</span></h1>
+      <p>
+        Unfiltered stories on product architecture, low-latency AI models, and voice-first workflows designed to reduce mental load.
+      </p>
+    </header>
+
+    <section class="posts-grid">
+      {posts.map((post: any) => (
+        <BlogCard post={post} lang="en" />
+      ))}
+    </section>
+  </div>
+</BlogLayout>

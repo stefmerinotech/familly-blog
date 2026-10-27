@@ -1,11 +1,37 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch all Spanish posts sorted by publication date
+const posts = (await getCollection('blog', ({ data }: any) => data.lang === 'es')) as any[];
+posts.sort((a: any, b: any) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BlogLayout
+  title="Familly Blog · Crónicas de un Asistente Familiar con IA"
+  description="Diario de desarrollo, arquitectura técnica y lecciones de producto en público construyendo Familly."
+  lang="es"
+  alternateUrl="/blog/en/"
+>
+  <div class="container">
+    <header class="blog-hero">
+      <div class="badge-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        <span>Build in Public & Changelog</span>
+      </div>
+      <h1>Construyendo el futuro de la <span>organización familiar</span></h1>
+      <p>
+        Crónicas sin filtros sobre diseño de producto, latencia en modelos de IA y arquitectura para liberar la carga mental del hogar.
+      </p>
+    </header>
+
+    <section class="posts-grid">
+      {posts.map((post: any) => (
+        <BlogCard post={post} lang="es" />
+      ))}
+    </section>
+  </div>
+</BlogLayout>

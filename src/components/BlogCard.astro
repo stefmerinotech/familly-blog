@@ -1,0 +1,45 @@
+---
+interface Props {
+  post: any;
+  lang: 'es' | 'en';
+}
+
+const { post, lang } = Astro.props;
+const { title, description, pubDate, tags = [] } = post.data;
+
+// Format date according to locale
+const formattedDate = new Intl.DateTimeFormat(lang === 'es' ? 'es-ES' : 'en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}).format(pubDate);
+
+// Estimate reading time from markdown body
+const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
+const readingTimeMin = Math.max(1, Math.ceil(wordCount / 200));
+const readingTimeLabel = lang === 'es' ? `${readingTimeMin} min de lectura` : `${readingTimeMin} min read`;
+
+// Compute slug
+const rawSlug = post.id.replace(/^(es|en)\//, '').replace(/\.(md|mdx)$/, '');
+const href = lang === 'es' ? `/blog/${rawSlug}` : `/blog/en/${rawSlug}`;
+---
+
+<a href={href} class="post-card">
+  <div class="post-meta">
+    <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+    <span class="post-meta-dot"></span>
+    <span class="reading-time">{readingTimeLabel}</span>
+  </div>
+
+  <h2 class="post-title">{title}</h2>
+  <p class="post-description">{description}</p>
+
+  {tags.length > 0 && (
+    <div class="post-tags">
+      {tags.map((tag: string) => (
+        <span class="tag-badge">#{tag}</span>
+      ))}
+    </div>
+  )}
+</a>
+
