@@ -5,7 +5,7 @@ pubDate: 2026-10-27
 author: "Stefano Merino"
 lang: "en"
 tags: ["build-in-public", "ai", "mvp", "voice-first"]
-alternateSlug: "01-construyendo-familly"
+alternateSlug: "01-building-familly"
 ---
 
 We are surrounded by productivity tools, yet the mental load of managing a household remains untouched.
