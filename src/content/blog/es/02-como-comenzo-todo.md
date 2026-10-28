@@ -5,7 +5,7 @@ pubDate: 2026-10-27
 author: "Stefano Merino"
 lang: "es"
 tags: ["build-in-public", "ai", "mvp", "voice-first"]
-alternateSlug: "02-como-comenzo"
+alternateSlug: "02-how-it-all-started"
 ---
 
 No recuerdo mi primer prompt, tampoco recuerdo bien cómo comenzó todo, sólo conozco mi caos familiar. Sí  recuerdo buscar en chatgpt soluciones o ideas para desarrollar y aprender, recuerdo la necesidad de entender más de temas de inteligencia artificial, pero estar un poco en las nubes. Chat GPT me recomendó, has una app que te ayude a la gestión familiar (entre otras ideas). Esa idea permaneció en mi mente, pues conocía mis desdichas y las de mi familia. 

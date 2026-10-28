@@ -5,7 +5,7 @@ pubDate: 2026-10-27
 author: "Stefano Merino"
 lang: "en"
 tags: ["build-in-public", "ai", "mvp", "voice-first"]
-alternateSlug: "02-how-it-all-started"
+alternateSlug: "02-como-comenzo"
 ---
 
 I honestly can’t remember my first prompt, nor do I really recall how the whole thing started; all I really know is the sheer chaos of my household. I do remember bugging ChatGPT for ideas and solutions to build and learn something new, feeling that itch to figure out AI, while basically daydreaming with my head in the clouds. ChatGPT tossed out: "build an app to help run your family" (among other random pitches). That one stuck with me, mostly because I knew all too well my own daily miseries and my family's mess.
