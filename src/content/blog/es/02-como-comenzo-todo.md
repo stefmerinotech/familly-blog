@@ -31,6 +31,17 @@ O por ejemplo saber que tus 3 hijos están en edades de vacunas y no recordar ag
 
 Yo diría que ese tipo de cosas son los casos de dolor más importantes. No dudo que el mes que viene o dentro de un año, salga una herramienta más poderosa que Familly, pero esto es un experimento de aprendizaje, es un salto a tratar de solucionar algo con tus medios, con tus propias manos, lo es para mi. Y si yo puedo, cualquiera puede.
 
+
+---
+
+## La primera tarea: Que se vea cool
+
+Recuerdo que muchas IA para ese momento tenían la forma de una esfera, entonces le dije a Gemini, quiero una esfera, con tonos naranjas y rojizos, no se, me gusta el color rojo, y que haya un lugar para poner texto, y que la esfera de vueltas, y que al presionar la esfera se habilite la opción de ingresar voz, y que haya una animación,... ¿Simple no?, pues al parecer sí, Gemini generó un codigo y muchas de las cosas que quería lo hizo, y con un diseño muy fiel a lo que tenía en mi cabeza, ese fue el primer boom, la primera explosión con el sonido de x-files de soundtrack. 
+
+Cuando vi esa interfaz me emocioné, no por que sea la mejor interfaz del mundo o la más útil o la que mejor venda, si no por que era lo que me había imaginado y no había tenido que sufrir demasiado para obtenerla. En ese momento me di cuenta que esto había que pensarlo bien, si iba a ser capaz de construír una app de verdad yo solo, teníamos que diseñar bien, de modo que ingresé mis ideas y le pedí a (no recuerdo cuál LLM) que me preparase un dossier o documento de proyecto, con todas los casos de uso, la finalidad, look and feel, y otras cosas necesarias para la creación. Y esa fue la pieza angular, lo adjunté como archivo fuente de mi proyecto en Gemini y comenzó el desafío. 
+
+Configurar Backend, frontend, github, actions, decidir cual servidor comprar, todo eso tuvo su lugar y su momento, iré contando más acerca de eso pero con lo que me gustaría que te quedes es que puedes hacer lo mismo que yo y conseguir incluso mejores resultados, seas quien seas, estés en la etapa de vida que sea y con el nivel educacional que sea, el cielo es el límite.
+
 Si te gustaría saber más de proyecto, apuntate en el waitlist y más adelante habilitaré las pruebas a ver si esta app te ayuda como espero que lo haga conmigo. 
 
 
